@@ -3,6 +3,10 @@
     --timer-color: rgba(255, 0, 0, 0.5);
 }
 
+html{
+    user-select: none;
+}
+
 #P1{
     left: 0;
 }
