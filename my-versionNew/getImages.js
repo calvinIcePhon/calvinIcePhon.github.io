@@ -1,8 +1,8 @@
 const Images = [
-  { id: 1, urls: ['/IMG/diffIMG/PL.png','/IMG/diffIMG/PR.png'] },
-  { id: 2, urls: ['/IMG/diffIMG/PL2.png','/IMG/diffIMG/PR2.png'] },
-  { id: 3, urls: ['/IMG/diffIMG/star_03.png','/IMG/diffIMG/star_04.png'] },
-  { id: 4, urls: ['/IMG/diffIMG/Pn1.png','/IMG/diffIMG/Pn2.png'] },
+  { id: 1, urls: ['IMG/diffIMG/PL.png','IMG/diffIMG/PR.png'] },
+  { id: 2, urls: ['IMG/diffIMG/PL2.png','IMG/diffIMG/PR2.png'] },
+  { id: 3, urls: ['IMG/diffIMG/star_03.png','IMG/diffIMG/star_04.png'] },
+  { id: 4, urls: ['IMG/diffIMG/Pn1.png','IMG/diffIMG/Pn2.png'] },
 ];
 const config = { time: 100, num: 2 };
 
