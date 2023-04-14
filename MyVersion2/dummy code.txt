@@ -1,0 +1,356 @@
+ if (this.blockType == "HS") {
+      if (distX < 0) {
+        if (boardArray[this.pos.Y][this.pos.X - 1] != "undefined") {
+          if (boardArray[this.pos.Y][this.pos.X - 1] == "X") {
+            boardArray[this.pos.Y][this.pos.X - 1] = "HS";
+            boardArray[this.pos.Y][this.pos.X + 1] = "X";
+            this.pos.X -= 1;
+
+            return true;
+          } else {
+            return false;
+          }
+        } else {
+          return false;
+        }
+      } else {
+        if (boardArray[this.pos.Y][this.pos.X + 2] != "undefined") {
+          if (boardArray[this.pos.Y][this.pos.X + 2] == "X") {
+            boardArray[this.pos.Y][this.pos.X + 2] = "HS";
+            boardArray[this.pos.Y][this.pos.X] = "X";
+            this.pos.X += 1;
+            return true;
+          } else {
+            return false;
+          }
+        } else {
+          return false;
+        }
+      }
+    } else if (this.blockType == "HL") {
+      if (distX < 0) {
+        if (boardArray[this.pos.Y][this.pos.X - 1] != "undefined") {
+          if (boardArray[this.pos.Y][this.pos.X - 1] == "X") {
+            boardArray[this.pos.Y][this.pos.X - 1] = "HL";
+            boardArray[this.pos.Y][this.pos.X + 2] = "X";
+            this.pos.X -= 1;
+            return true;
+          } else {
+            return false;
+          }
+        } else {
+          return false;
+        }
+      } else {
+        if (boardArray[this.pos.Y][this.pos.X + 3] != "undefined") {
+          if (boardArray[this.pos.Y][this.pos.X + 3] == "X") {
+            boardArray[this.pos.Y][this.pos.X + 3] = "HL";
+            boardArray[this.pos.Y][this.pos.X] = "X";
+            this.pos.X += 1;
+            return true;
+          } else {
+            return false;
+          }
+        } else {
+          return false;
+        }
+      }
+    } else if (this.blockType == "VS") {
+      if (distY < 0) {
+        if (boardArray[this.pos.Y - 1][this.pos.X] != "undefined") {
+          if (boardArray[this.pos.Y - 1][this.pos.X] == "X") {
+            boardArray[this.pos.Y - 1][this.pos.X] = "VS";
+            boardArray[this.pos.Y + 2][this.pos.X] = "X";
+            this.pos.Y -= 1;
+            return true;
+          } else {
+            return false;
+          }
+        } else {
+          return false;
+        }
+      } else {
+        if (boardArray[this.pos.Y + 2][this.pos.X] != "undefined") {
+          if (boardArray[this.pos.Y + 2][this.pos.X] == "X") {
+            boardArray[this.pos.Y + 2][this.pos.X] = "VS";
+            boardArray[this.pos.Y][this.pos.X] = "X";
+            this.pos.Y += 1;
+            return true;
+          } else {
+            return false;
+          }
+        } else {
+          return false;
+        }
+      }
+    } else if (this.blockType == "VL") {
+      if (distX < 0) {
+        if (boardArray[this.pos.Y - 1][this.pos.X] != "undefined") {
+          if (boardArray[this.pos.Y - 1][this.pos.X] == "X") {
+            boardArray[this.pos.Y - 1][this.pos.X] = "VL";
+            boardArray[this.pos.Y + 3][this.pos.X] = "X";
+            this.pos.Y -= 1;
+            return true;
+          } else {
+            return false;
+          }
+        } else {
+          return false;
+        }
+      } else {
+        if (boardArray[this.pos.Y + 3][this.pos.X] != "undefined") {
+          if (boardArray[this.pos.Y + 3][this.pos.X] == "X") {
+            boardArray[this.pos.Y + 3][this.pos.X] = "VL";
+            boardArray[this.pos.Y][this.pos.X] = "X";
+            this.pos.Y += 1;
+            return true;
+          } else {
+            return false;
+          }
+        } else {
+          return false;
+        }
+      }
+    } else if (this.blockType == "P") {
+      if (distX < 0) {
+        if (boardArray[this.pos.Y][this.pos.X - 1] != "undefined") {
+          if (boardArray[this.pos.Y][this.pos.X - 1] == "X") {
+            boardArray[this.pos.Y][this.pos.X - 1] = "P";
+            this.pos.X -= 1;
+            boardArray[this.pos.Y][this.pos.X + 2] = "X";
+            return true;
+          } else {
+            return false;
+          }
+        } else {
+          return false;
+        }
+      } else {
+        if (boardArray[this.pos.Y][this.pos.X + 2] != "undefined") {
+          if (boardArray[this.pos.Y][this.pos.X + 2] == "X") {
+            boardArray[this.pos.Y][this.pos.X + 2] = "P";
+            this.pos.X += 1;
+            boardArray[this.pos.Y][this.pos.X] = "X";
+            return true;
+          } else {
+            return false;
+          }
+        } else {
+          return false;
+        }
+      }
+    } else {
+      return false;
+    }
+
+
+
+
+
+
+
+
+============================================================
+
+ if (this.blockType == "HS") {
+      if (type == 'left') {
+        while (dist > 30) {
+          if (this.pos.X - 1 < 0) {
+            return false;
+          } else {
+            if (boardArray[this.pos.Y][this.pos.X - 1] == "X") {
+              boardArray[this.pos.Y][this.pos.X - 1] = "HS";
+              boardArray[this.pos.Y][this.pos.X + 1] = "X";
+              this.pos.X -= 1;
+              dist -= 80;
+            } else { 
+              return false;
+            }
+          } 
+        }
+        return true;
+      } else if (type == 'right') {
+        while (dist > 30) {
+          if (this.pos.X + 2 > sizeX) {
+            return false;
+          } else {
+            if (boardArray[this.pos.Y][this.pos.X + 2] == "X") {
+              boardArray[this.pos.Y][this.pos.X + 2] = "HS";
+              boardArray[this.pos.Y][this.pos.X] = "X";
+              this.pos.X += 1;
+              dist -= 80;
+            } else { 
+              return false;
+            }
+          } 
+        }
+        return true;
+        }
+    } else if (this.blockType == "HL") {
+      if (type == 'left') {
+        while (dist > 30) {
+          if (this.pos.X - 1 < 0) {
+            return false;
+          } else {
+            if (boardArray[this.pos.Y][this.pos.X - 1] == "X") {
+              boardArray[this.pos.Y][this.pos.X - 1] = "HL";
+              boardArray[this.pos.Y][this.pos.X + 2] = "X";
+              this.pos.X -= 1;
+              dist -= 80;
+            } else { 
+              return false;
+            }
+          } 
+        }
+        return true;
+      } else if (type == 'right') {
+        while (dist > 30) {
+          if (this.pos.X + 3 > sizeX) {
+            return false;
+          } else {
+            if (boardArray[this.pos.Y][this.pos.X + 3] == "X") {
+              boardArray[this.pos.Y][this.pos.X + 3] = "HL";
+              boardArray[this.pos.Y][this.pos.X] = "X";
+              this.pos.X += 1;
+              dist -= 80;
+            } else { 
+              return false;
+            }
+          } 
+        }
+        return true;
+        }
+    } else if (this.blockType == "VS") {
+      if (type == 'up') {
+        while (dist > 30) {
+          if (this.pos.Y - 1 < 0) {
+            return false;
+          } else {
+            if (boardArray[this.pos.Y - 1][this.pos.X] == "X") {
+              boardArray[this.pos.Y - 1][this.pos.X] = "VS";
+              boardArray[this.pos.Y + 2][this.pos.X] = "X";
+              this.pos.Y -= 1;
+              dist -= 80;
+            } else { 
+              return false;
+            }
+          } 
+        }
+        return true;
+      } else if (type == 'down') {
+        while (dist > 30) {
+          if (this.pos.Y + 2 > sizeX) {
+            return false;
+          } else {
+            if (boardArray[this.pos.Y + 2][this.pos.X] == "X") {
+              boardArray[this.pos.Y + 2][this.pos.X] = "VS";
+              boardArray[this.pos.Y][this.pos.X] = "X";
+              this.pos.Y += 1;
+              dist -= 80;
+            } else { 
+              return false;
+            }
+          } 
+        }
+        return true;
+        }
+    } else if (this.blockType == "VL") {
+      if (type == 'up') {
+        while (dist > 30) {
+          if (this.pos.Y - 1 < 0) {
+            return false;
+          } else {
+            if (boardArray[this.pos.Y - 1][this.pos.X] == "X") {
+              boardArray[this.pos.Y - 1][this.pos.X] = "VL";
+              boardArray[this.pos.Y + 2][this.pos.X] = "X";
+              this.pos.Y -= 1;
+              dist -= 80;
+            } else { 
+              return false;
+            }
+          } 
+        }
+        return true;
+      } else if (type == 'down') {
+        while (dist > 30) {
+          if (this.pos.Y + 3 > sizeX) {
+            return false;
+          } else {
+            if (boardArray[this.pos.Y + 3][this.pos.X] == "X") {
+              boardArray[this.pos.Y + 3][this.pos.X] = "VL";
+              boardArray[this.pos.Y][this.pos.X] = "X";
+              this.pos.Y += 1;
+              dist -= 80;
+            } else { 
+              return false;
+            }
+          } 
+        }
+        return true;
+        }
+    } else if (this.blockType == "P") {
+      if (type == 'left') {
+        while (dist > 30) {
+          if (this.pos.X - 1 < 0) {
+            return false;
+          } else {
+            if (boardArray[this.pos.Y][this.pos.X - 1] == "X") {
+              boardArray[this.pos.Y][this.pos.X - 1] = "P";
+              boardArray[this.pos.Y][this.pos.X + 1] = "X";
+              this.pos.X -= 1;
+              dist -= 80;
+            } else { 
+              return false;
+            }
+          } 
+        }
+        return true;
+      } else if (type == 'right') {
+        while (dist > 30) {
+          if (this.pos.X + 2 > sizeX) {
+            return false;
+          } else {
+            if (boardArray[this.pos.Y][this.pos.X + 2] == "X") {
+              boardArray[this.pos.Y][this.pos.X + 2] = "P";
+              boardArray[this.pos.Y][this.pos.X] = "X";
+              this.pos.X += 1;
+              dist -= 80;
+            } else { 
+              return false;
+            }
+          } 
+        }
+        return true;
+        }
+    } else {
+      return false;
+    }
+
+
+
+    =============================================================
+
+     boardEleChilds[index].style.top =
+        (blocks[index].pos.Y * 80).toString() + "px";
+      boardEleChilds[index].style.left =
+        (blocks[index].pos.X * 80).toString() + "px";
+      resetVariable();
+      console.log("true end");
+      console.log(boardArray);
+
+
+      blocks[index].Move(move.m, move.d)
+
+
+      ================================================================
+
+         if (type == "left") {
+        while (dist > 30) {
+          let n = -1;
+          if (!(this.pos.X + n > sizeX) && boardArray[this.pos.Y][this.pos.X + n] == "X") {
+            this.stepsToMove += n;
+          } else {
+            break;
+          }
+          dist -= 80;
+        }

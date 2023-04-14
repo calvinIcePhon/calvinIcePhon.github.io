@@ -1,0 +1,99 @@
+@font-face {
+    font-family: "Press Start 2P";
+    src: url("PressStart2P-Regular.ttf");
+    src: 
+      url("PressStart2P-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+  }
+
+*{
+    touch-action: manipulation;
+}
+
+html, body{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    margin: 0 !important;
+    font-family:  "Press Start 2P", cursive;
+    
+}
+
+#layout{
+  background-image: url('../images/background.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+    align-items: center;
+    margin-top: 2%;
+}
+
+#statuspanel{
+    width: 100%;
+    height: 15%;
+    background-color: aqua;
+    font-family:  "Press Start 2P", cursive;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around
+}
+
+#board{
+    position: relative;
+    width: 560px;
+    height: 420px;
+    border-radius: 20px;
+    border: 5px solid black;
+  background-image: url('../images/gameBackground.png');
+}
+
+.ObstacleBlock{
+    background-image: url('../images/enemyVL.png');
+    position: absolute;
+    transition:all 100ms linear; ;
+   border-radius: 15px;
+}
+
+.ObstacleBlock.Player{
+    background-image: url('../images/block.png');
+    position: absolute;
+    overflow: visible; 
+}
+
+#modal{
+    background-color: rgba(0, 0, 0,0.8);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#gameControl{
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background-color: rgba(34, 255, 0,1);
+    height: 30%;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #startButton{
+    border: 2px solid;
+    margin-top: 5%;
+    height: 20%;
+    width: 30%;
+    text-align: center;
+  }
+
