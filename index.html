@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.bundle.js"></script>
+    <title>Form</title>
+    <style>
+
+        .room {
+            margin: 2%;
+        }
+        .twoside {
+            column-count: 3;
+            column-gap: 50px;
+            
+        }
+
+        text {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <form id="form">
+
+            <h1>Meadow Park Room Electricity Bill Calculation Form</h1>
+            <br>
+            
+
+            <div class="form-group">
+
+                <div>
+                    <label>
+                        Enter the total Electricity usage of the unit:
+                    </label>
+                    <input required type="text" class="form-control" id="totalusage">
+                </div>
+                <div>
+                    <label>
+                        Enter the bill (RM X.XX):
+                    </label>
+                    <input required type="text" class="form-control" id="bill">
+                </div>
+                <br>
+                <h3>Each room usage <text>(Checked when the room is rented)</text> </h3>
+                <br>
+                <div class="room">
+                    <input class="form-check-input" name="check" type="checkbox" value="1" id="checkrone">
+                    <label class="form-check-label" for="flexCheckIndeterminate">
+                        <h4>Room 1 (B1)</h4>
+                    </label>
+                    <div class="twoside">
+                        <div>
+                            <label>Previous usage</label>
+                            <input type="text" class="form-control" id="previoususageR1">
+                        </div>
+                        <div>
+                            <label>Current usage</label>
+                            <input type="text" class="form-control" id="currentusageR1">
+                        </div>
+                        <div>
+                            <label>Number of people (Default to 1)<text>(Optional)</text></label>
+                            <input type="text" class="form-control" id="peoplenumR1">
+                        </div>
+                    </div>
+                </div>
+                <div class="room">
+                    <input class="form-check-input" name="check" type="checkbox" value="2" id="checkrone">
+                    <label class="form-check-label" for="flexCheckIndeterminate">
+                        <h4>Room 2 (B2)</h4>
+                    </label>
+                    <div class="twoside">
+                        <div>
+                            <label>Previous usage</label>
+                            <input type="text" class="form-control" id="previoususageR2">
+                        </div>
+                        <div>
+                            <label>Current usage</label>
+                            <input type="text" class="form-control" id="currentusageR2">
+                        </div>
+                        <div>
+                            <label>Number of people (Deafult to 1)<text>(Optional)</text></label>
+                            <input type="text" class="form-control" id="peoplenumR2">
+                        </div>
+                    </div>
+                </div>
+                <div class="room">
+                    <input class="form-check-input" name="check" type="checkbox" value="3" id="checkrone">
+                    <label class="form-check-label" for="flexCheckIndeterminate">
+                        <h4>Room 3 (B3)</h4>
+                    </label>
+                    <div class="twoside">
+                        <div>
+                            <label>Previous usage</label>
+                            <input type="text" class="form-control" id="previoususageR3">
+                        </div>
+                        <div>
+                            <label>Current usage</label>
+                            <input type="text" class="form-control" id="currentusageR3">
+                        </div>
+                        <div>
+                            <label>Number of people (Deafult to 1)<text>(Optional)</text></label>
+                            <input type="text" class="form-control" id="peoplenumR3">
+                        </div>
+                    </div>
+                </div>
+                <div class="room">
+                    <input class="form-check-input" name="check" type="checkbox" value="4" id="checkrone">
+                    <label class="form-check-label" for="flexCheckIndeterminate">
+                        <h4>Room 4 (B4)</h4>
+                    </label>
+                    <div class="twoside">
+                        <div>
+                            <label>Previous usage</label>
+                            <input type="text" class="form-control" id="previoususageR4">
+                        </div>
+                        <div>
+                            <label>Current usage</label>
+                            <input type="text" class="form-control" id="currentusageR4">
+                        </div>
+                        <div>
+                            <label>Number of people (Deafult to 1)<text>(Optional)</text> </label>
+                            <input type="text" class="form-control" id="peoplenumR4">
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+
+        </form>
+        <p id="demo"></p>
+        <a href="list.html" style="margin-top: 5%; margin-bottom: 5%;" class="btn btn-outline-primary">Go to Bill
+            List</a>
+        <p id="charge"></p>
+    </div>
+    <script>
+        $(function () {
+            var previoususage = 0;
+            var currentusage =0;
+            var bill = 0;
+            var membernum;
+            var roomnum;
+            var room = [];
+            var rate;
+            var obj = new Object();
+            var roomobj = [];
+
+            $("#form").submit(function (event) {
+                event.preventDefault();
+
+                totalusage = $('#totalusage').val();
+                bill = $('#bill').val();
+                rate = ratecal(totalusage,bill);
+                
+
+                roomnum = document.querySelectorAll("input[type=checkbox][name=check]:checked");
+             
+
+                for(var i=0;i<roomnum.length;i++){
+                  room.push(parseInt((roomnum[i].value)));
+                 
+                }
+
+               for(var i=0;i<room.length;i++){
+                var peoplenum = "#peoplenumR"+room[i].toString();
+                var checker = $(peoplenum).val();
+                var pnum = 0;
+                if(checker==''){
+                    pnum = 1;
+                }else{
+                    pnum = parseInt($(peoplenum).val());
+                }
+                obj = {
+                    Room:"B"+room[i].toString(), NumofPeople:pnum, Bill: roombill(roomusage(room[i]),rate).toFixed(2), Usage: roomusage(room[i]).toFixed(2)
+                }
+
+                roomobj.push(obj);
+               }
+
+               
+
+
+                
+            })
+
+            function roombill(usage, rate){
+                var bill = usage * rate;
+                return parseFloat(bill);
+            }
+
+            function roomusage(room){
+                var previoususage = "#previoususageR"+room.toString();
+                var currentusage = "#currentusageR"+room.toString();
+                var previous;
+                var current;
+                previous = parseFloat($(previoususage).val());
+                current = parseFloat($(currentusage).val());
+                return current-previous;
+            }
+
+            function ratecal(totalusage, bill){
+                var rate = parseFloat(bill)/parseFloat(totalusage);
+                return rate.toFixed(3); 
+            }
+
+            $("a").click(function () {
+                if (typeof (Storage) !== "undefined") {
+                    sessionStorage.setItem("RoomDetails", JSON.stringify(roomobj));
+                    sessionStorage.setItem("TotalUsage", totalusage);
+                    sessionStorage.setItem("Rate ", rate);
+                    sessionStorage.setItem("Bill",bill);
+                    room=[];
+                roomobj = [];
+                }
+            })
+        })
+    </script>
+
+</body>
+
+</html>

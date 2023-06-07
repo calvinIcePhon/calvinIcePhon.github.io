@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.bundle.js"></script>
+    <title>List</title>
+</head>
+<body>
+    <h1>Monthly Contribution List</h1>
+    <table class="table"> 
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Room</th>
+                <th scope="col">Room Bill</th>
+                <th scope="col">Usage </th>
+                <th scope="col">NumofPeople</th>
+                <th scope="col">Common Area Bill</th>
+                <th scope="col">Total Bill to Pay</th>
+            </tr>
+        </thead>
+        <tbody id="tablebody"></tbody>
+    </table>
+    <p id="alert"></p>
+    <a href="index.html" class="btn btn-outline-primary">Go to Bill Calculation Form</a>
+    <script>
+        $(function(){
+            var room;
+            var totalusage;
+            var roomusage =0;
+            var rate;
+            var peoplenum = 0;
+            var realbill;
+            var calculatedbill = 0;
+            var commonareausage = 0;
+            var commonareabill = 0;
+            var averagecommonareabill = 0;
+
+            if(typeof(Storage)!== "undefined"){
+                room = JSON.parse(sessionStorage.getItem("RoomDetails"));
+                totalusage = sessionStorage.getItem("TotalUsage");
+                rate = sessionStorage.getItem("Rate ");
+                realbill = sessionStorage.getItem("Bill");
+
+                for(var i=0;i<room.length;i++){
+                    peoplenum += room[i].NumofPeople;
+                    calculatedbill+= parseFloat(room[i].Bill);
+                    roomusage += parseFloat(room[i].Usage);
+                }
+               
+                commonareausage = totalusage-roomusage;
+                averagecommonareabill = ((commonareausage/peoplenum)*rate).toFixed(2);
+                calculatedbill = (calculatedbill + (averagecommonareabill*peoplenum)).toFixed(2);
+
+                
+                for(var i = 0; i<room.length;i++){
+                    var totalbill = 0;
+                    totalbill = parseFloat(room[i].Bill) + parseFloat(averagecommonareabill * room[i].NumofPeople );
+
+                    $("#tablebody").append("<tr><td >" + room[i].Room + "</td> <br> <td >"+ 
+                        room[i].Bill+"</td> <br> <td>"+ room[i].Usage+"</td><br><td>"+ room[i].NumofPeople+"</td><br><td>"+ (averagecommonareabill*room[i].NumofPeople) +"</td><br><td>"+ totalbill.toFixed(2) +"</td></tr>");
+                    
+                }
+                
+                $("#alert").html("<div class=\"alert alert-success\" role=\"alert\">Total Usage: "+ totalusage +"</div> ");
+                $("#alert").append("<div class=\"alert alert-success\" role=\"alert\">Total Bill Calculated: RM"+ calculatedbill +"</div> ");
+                $("#alert").append("<div class=\"alert alert-success\" role=\"alert\">Total Usage of Common Area: "+ commonareausage +"</div> ");
+                $("#alert").append("<div class=\"alert alert-success\" role=\"alert\">Common Area Bill: RM"+ commonareausage*rate +"</div> ");
+                $("#alert").append("<div class=\"alert alert-success\" role=\"alert\">Rate: "+ rate +"</div> ");
+            }
+        })
+    </script>
+</body>
+</html>
