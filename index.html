@@ -133,7 +133,7 @@
                 </div>
                 
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button id="sumbit_btn" type="submit" style="diplay: none;" class="btn btn-primary">Submit</button>
 
         </form>
         <p id="demo"></p>
@@ -142,6 +142,8 @@
         <p id="charge"></p>
     </div>
     <script>
+
+        var subBtn = document.getElementById('submit_btn');
         $(function () {
             var previoususage = 0;
             var currentusage =0;
@@ -155,6 +157,7 @@
 
             $("#form").submit(function (event) {
                 event.preventDefault();
+                subBtn.style.display ="block";
 
                 totalusage = $('#totalusage').val();
                 bill = $('#bill').val();
